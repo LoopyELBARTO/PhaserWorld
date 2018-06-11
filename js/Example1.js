@@ -114,32 +114,43 @@ class Example1 extends Phaser.Scene{
 
     update(time, delta){
 
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
         
         if (this.key_D.isDown){
             //player.x += 2;
-            player.setVelocityX(playerVelocity);
+            //player.setVelocityX(playerVelocity);
+            player.body.velocity.x = playerVelocity;
             player.anims.play('walk_horizontal', true);
             player.flipX= false;
+            return
         }
         else if (this.key_A.isDown){
             //player.x += -2;
-            player.setVelocityX(-playerVelocity);
+            //player.setVelocityX(-playerVelocity);
+            player.body.velocity.x = -playerVelocity;
             player.anims.play('walk_horizontal', true);
             player.flipX= true;
+            return
         }
         else if (this.key_W.isDown){
             //player.y += -2;
-            player.setVelocityY(-playerVelocity);
+            //player.setVelocityY(-playerVelocity);
+            player.body.velocity.y = -playerVelocity;
             player.anims.play('forward', true);
+            return
         }
         else if (this.key_S.isDown){
             //player.y += 2;
-            player.setVelocityY(playerVelocity);
+            //player.setVelocityY(playerVelocity);
+            player.body.velocity.y = playerVelocity;
             player.anims.play('backward', true);
+            return
         }
         else{
             player.setVelocity(0);
             player.anims.stop();
+            return
             //player.anims.play('idle', true);
         }
     }

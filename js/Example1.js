@@ -21,11 +21,13 @@ class Example1 extends Phaser.Scene{
 
         var backgroundTiles = map.addTilesetImage('DungeonTileset', 'tiles');
         var groundTiles = map.addTilesetImage('DungeonTileset', 'tiles');
+        var boxTiles = map.addTilesetImage('DungeonTileset', 'tiles');
         var wallTiles = map.addTilesetImage('DungeonTileset', 'tiles');
         var wallBarrierTile = map.addTilesetImage('DungeonTileset', 'tiles');
 
         backgroundBarrier = map.createStaticLayer('Background', backgroundTiles,0,0);        
         var groundLayer = map.createStaticLayer('Ground', groundTiles, 0, 0);
+        var boxLayer = map.createStaticLayer('Box', boxTiles, 0,0);
         var wallLayer = map.createStaticLayer('Walls', wallTiles, 0,0);
 
         wallBarrier = map.createStaticLayer('WallBarrier', wallBarrierTile,0,0);
@@ -114,43 +116,34 @@ class Example1 extends Phaser.Scene{
 
     update(time, delta){
 
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
-        
+        player.setVelocity(0);
+
         if (this.key_D.isDown){
-            //player.x += 2;
-            //player.setVelocityX(playerVelocity);
-            player.body.velocity.x = playerVelocity;
+            player.setVelocityX(playerVelocity);
             player.anims.play('walk_horizontal', true);
             player.flipX= false;
             return
         }
         else if (this.key_A.isDown){
-            //player.x += -2;
-            //player.setVelocityX(-playerVelocity);
-            player.body.velocity.x = -playerVelocity;
+            player.setVelocityX(-playerVelocity);
             player.anims.play('walk_horizontal', true);
             player.flipX= true;
             return
         }
         else if (this.key_W.isDown){
-            //player.y += -2;
-            //player.setVelocityY(-playerVelocity);
-            player.body.velocity.y = -playerVelocity;
+            player.setVelocityY(-playerVelocity);
             player.anims.play('forward', true);
             return
         }
         else if (this.key_S.isDown){
-            //player.y += 2;
-            //player.setVelocityY(playerVelocity);
-            player.body.velocity.y = playerVelocity;
+            player.setVelocityY(playerVelocity);
             player.anims.play('backward', true);
             return
         }
         else{
             player.setVelocity(0);
             player.anims.stop();
-            return
+
             //player.anims.play('idle', true);
         }
     }
